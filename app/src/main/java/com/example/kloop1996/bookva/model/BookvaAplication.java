@@ -21,6 +21,12 @@ public class BookvaAplication extends Application {
         return (BookvaAplication) context.getApplicationContext();
     }
 
+    public void AccessToken(AccessToken token){
+        this.accessToken= token;
+    }
+
+    public AccessToken getAccessToken(){return accessToken;}
+
     public BookvaService getBookvaService() {
         if (bookvaService == null) {
             bookvaService = BookvaService.Factory.create();

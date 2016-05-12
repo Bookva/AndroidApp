@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_centerInParent="true">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.kloop1996.bookva.viewmodel.AuthorizationViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <LinearLayout
+        android:id="@+id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/edtLat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:text="@{viewModel.login}"
+            />
+
+        <EditText
+            android:id="@+id/edtLong"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:inputType="numberDecimal"
+            android:text="@{viewModel.password}"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="125dp"
+            android:layout_marginRight="125dp"
+            android:text="@string/login"
+            android:onClick="@{viewModel.onClickLogin}"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:visibility="@{viewModel.progressVisibility}"/>
+
+    </RelativeLayout>
+</layout>

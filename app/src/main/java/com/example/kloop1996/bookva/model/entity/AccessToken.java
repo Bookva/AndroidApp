@@ -15,6 +15,10 @@ public class AccessToken {
     @SerializedName("token_type")
     private String tokenType;
 
+    public String getToken(){return token;}
+    public String getUsername(){return username;}
+    public String getTokenType(){return tokenType;}
+
     public AccessToken(String token, String username, String tokenType) {
         this.token = token;
         this.tokenType = tokenType;
