@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="white_transparent">#75ffffff</color>
     <color name="black">#000000</color>>
-
+    <color name="divider">#cbcbcb</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
 </resources>

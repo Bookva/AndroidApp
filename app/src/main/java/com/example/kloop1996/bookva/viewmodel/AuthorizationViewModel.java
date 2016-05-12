@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.kloop1996.bookva.R;
 import com.example.kloop1996.bookva.model.BookvaAplication;
 import com.example.kloop1996.bookva.model.BookvaService;
 import com.example.kloop1996.bookva.model.entity.AccessToken;
@@ -49,6 +50,8 @@ public class AuthorizationViewModel implements ViewModel {
         final BookvaAplication bookvaAplication = BookvaAplication.get(context);
         BookvaService bookvaService = bookvaAplication.getBookvaService();
 
+        if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
+
         subscription = bookvaService.getTokenAuthorization("password", username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(bookvaAplication.defaultSubscribeScheduler())
@@ -60,7 +63,7 @@ public class AuthorizationViewModel implements ViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "Load error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getResources().getText(R.string.authorization_error), Toast.LENGTH_LONG).show();
                         progressVisibility.set(View.INVISIBLE);
                     }
 
@@ -69,7 +72,9 @@ public class AuthorizationViewModel implements ViewModel {
 
                         if (token.getToken() != null) {
                             bookvaAplication.setToken(token);
-
+                            Toast.makeText(context, context.getResources().getText(R.string.authorization_success), Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(context, context.getResources().getText(R.string.authorization_wrong_password), Toast.LENGTH_LONG).show();
                         }
 
                     }

@@ -4,6 +4,7 @@ import com.example.kloop1996.bookva.model.entity.AccessToken;
 import com.example.kloop1996.bookva.model.entity.Author;
 import com.example.kloop1996.bookva.model.entity.Genre;
 import com.example.kloop1996.bookva.model.entity.Profile;
+import com.example.kloop1996.bookva.model.entity.Work;
 
 import java.util.List;
 import java.util.Observable;
@@ -56,6 +57,12 @@ public interface BookvaService {
 
     @POST("/api/account/register")
     public rx.Observable<ResponseBody> registerUser(@Body Profile profile);
+
+    @Headers({
+            "Content-type : application/x-www-form-urlencoded"
+    })
+    @GET("api/works")
+    public rx.Observable<List<Work>> getAllWorks();
 
     class Factory {
         public static BookvaService create() {

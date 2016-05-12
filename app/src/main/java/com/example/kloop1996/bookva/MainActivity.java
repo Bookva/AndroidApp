@@ -15,7 +15,9 @@ import com.example.kloop1996.bookva.R;
 import com.example.kloop1996.bookva.model.BookvaAplication;
 import com.example.kloop1996.bookva.model.BookvaService;
 import com.example.kloop1996.bookva.model.entity.Author;
+import com.example.kloop1996.bookva.model.entity.Work;
 import com.example.kloop1996.bookva.view.AuthorizationFragment;
+import com.example.kloop1996.bookva.view.WorkFragment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,11 +34,6 @@ import rx.android.schedulers.AndroidSchedulers;
 public class MainActivity extends AppCompatActivity {
     private Subscription subscription;
     private Drawer drawer = null;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +66,13 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction tx = getFragmentManager()
                     .beginTransaction();
 
-            tx.add(R.id.container_layout, new AuthorizationFragment());
+            tx.add(R.id.container_layout, new WorkFragment());
             tx.addToBackStack(null);
             tx.commit();
 
         }
 
 //        final BookvaAplication bookvaAplication = BookvaAplication.get(this);
-//
 //        BookvaService bookvaService = bookvaAplication.getBookvaService();
 //      /*  Call<List<Author>>  call = bookvaService.getAuthors();
 //        Call<Author> callAuthor = bookvaService.getAuthor(4);
@@ -168,9 +164,27 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    }
 //        });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+//        subscription = bookvaService.getAllWorks()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(bookvaAplication.defaultSubscribeScheduler())
+//                .subscribe(new Subscriber<List<Work>>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Toast.makeText(bookvaAplication, "Load error", Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Work> authors) {
+//                        List<Work> aut = authors;
+//                        Toast.makeText(bookvaAplication, "Load", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
     }
 
 
@@ -187,43 +201,4 @@ public class MainActivity extends AppCompatActivity {
         if (subscription != null) subscription.unsubscribe();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.kloop1996.bookva/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.kloop1996.bookva/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }

@@ -30,9 +30,6 @@ public class AuthorizationFragment extends Fragment {
         authorizationFragmentBinding.setViewModel(authorizationViewModel);
 
         return authorizationFragmentBinding.getRoot();
-
     }
-
-
 
 }
