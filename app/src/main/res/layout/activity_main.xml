@@ -15,12 +15,21 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:popupTheme="@style/AppTheme" />
-
     <FrameLayout
-        android:id="@+id/container_layout"
+        android:id="@+id/drawer_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
+        <!-- the layout which will be the content of the activity (which will be hosted inside the drawer (NOT the list of the drawer)) -->
+        <RelativeLayout
+            android:id="@+id/container_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            android:layout_below="@+id/drawer_container"
+        </RelativeLayout>
     </FrameLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

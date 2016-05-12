@@ -1,7 +1,9 @@
 package com.example.kloop1996.bookva;
 
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +16,12 @@ import com.example.kloop1996.bookva.model.BookvaAplication;
 import com.example.kloop1996.bookva.model.BookvaService;
 import com.example.kloop1996.bookva.model.entity.Author;
 import com.example.kloop1996.bookva.view.AuthorizationFragment;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 
 import java.util.List;
 
@@ -23,6 +31,12 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends AppCompatActivity {
     private Subscription subscription;
+    private Drawer drawer = null;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +46,23 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final android.support.v7.app.ActionBar ab = getSupportActionBar();
+        final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(R.string.app_name);
+
+
+        drawer = new DrawerBuilder(this)
+                .withRootView(R.id.drawer_container)
+                .withHeader(R.layout.header)
+                .withToolbar(toolbar)
+                .withCloseOnClick(true)
+                .withActionBarDrawerToggleAnimated(true)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTextColorRes(R.color.black),
+                        new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTextColorRes(R.color.black)
+                )
+                .withSavedInstance(savedInstanceState).build();
 
         if (savedInstanceState == null) {
 
@@ -141,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    }
 //        });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -157,4 +187,43 @@ public class MainActivity extends AppCompatActivity {
         if (subscription != null) subscription.unsubscribe();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.kloop1996.bookva/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.kloop1996.bookva/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
