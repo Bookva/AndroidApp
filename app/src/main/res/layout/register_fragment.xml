@@ -95,6 +95,21 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/emailEdit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/input_login_hint"
+                android:text="@{viewModel.loginField}"
+                app:addTextChangedListener="@{viewModel.loginEditTextWatcher}"/>
+
+            <EditText
                 android:id="@+id/loginEdit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -108,6 +123,7 @@
                 android:textColorHint="@color/input_login_hint"
                 android:text="@{viewModel.loginField}"
                 app:addTextChangedListener="@{viewModel.loginEditTextWatcher}"/>
+
 
             <EditText
                 android:id="@+id/passwordEdit"
@@ -127,12 +143,12 @@
             <!-- Login Button -->
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/registerButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:background="@color/btn_login_bg"
-                android:text="@string/btn_login"
+                android:text="@string/btn_register"
                 android:textColor="@color/btn_login"
                 android:onClick="@{viewModel.onClickLogin}"/>
 
@@ -144,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dip"
                 android:background="@null"
-                android:text="@string/btn_link_to_register"
+                android:text="@string/btn_link_to_login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp" />

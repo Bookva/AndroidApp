@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.kloop1996.bookva.viewmodel.WorkListViewModel" />
+            type="com.bsuir.kloop1996.bookva.viewmodel.WorkListViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="wrap_content"

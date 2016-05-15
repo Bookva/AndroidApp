@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kloop1996.bookva.viewmodel.ItemWorkViewModel"
+            type="com.bsuir.kloop1996.bookva.viewmodel.ItemWorkViewModel"
             />
     </data>
 
