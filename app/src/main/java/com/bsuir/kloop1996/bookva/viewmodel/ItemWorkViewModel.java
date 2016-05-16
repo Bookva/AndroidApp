@@ -7,9 +7,11 @@ import android.databinding.BindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bsuir.kloop1996.bookva.R;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
 import com.bsuir.kloop1996.bookva.ui.view.activity.BookDetailActivity;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.AuthorizationFragment;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -52,9 +54,14 @@ public class ItemWorkViewModel extends BaseObservable implements ViewModel {
 
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
+        if (imageUrl != null && imageUrl.length()!=0) {
+            Picasso.with(view.getContext())
+                    .load(imageUrl).placeholder(R.drawable.user_placeholder)
+                    .into(view);
+        } else
+            Glide.with(view.getContext())
+                    .load(R.drawable.user_placeholder)
+                    .into(view);
     }
 
     @Override
@@ -66,8 +73,8 @@ public class ItemWorkViewModel extends BaseObservable implements ViewModel {
     public void onClick(View v) {
         Context context = v.getContext();
         Intent intent = new Intent(context, BookDetailActivity.class);
-        intent.putExtra(BookDetailActivity.EXTRA_ID_WORK,work.id);
-        intent.putExtra(BookDetailActivity.EXTRA_TITLE,work.title);
+        intent.putExtra(BookDetailActivity.EXTRA_ID_WORK, work.id);
+        intent.putExtra(BookDetailActivity.EXTRA_TITLE, work.title);
 
         context.startActivity(intent);
     }

@@ -7,16 +7,16 @@ public class AuthorPreview {
     public int id;
     public String displayName;
     public String pictureSource;
-    public String previewPicureSource;
+    public String previewPictureSource;
 
     public AuthorPreview(int id,String displayName,String pictureSource,String previewPicureSource){
         this.id=id;
         this.displayName=displayName;
         this.pictureSource=pictureSource;
-        this.previewPicureSource=previewPicureSource;
+        this.previewPictureSource=previewPicureSource;
     }
 
 
     public String getDisplayName(){return displayName;}
-    public String getPreviewPicureSource(){return previewPicureSource;}
+    public String getPreviewPicureSource(){return previewPictureSource;}
 }

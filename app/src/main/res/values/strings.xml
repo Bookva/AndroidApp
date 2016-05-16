@@ -26,4 +26,5 @@
     <string name="description">Описание</string>
     <string name="extract">Отрывок</string>
     <string name="text_value">Текст</string>
+    <string name="author">Автор</string>
 </resources>

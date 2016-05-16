@@ -92,6 +92,45 @@
                             style="@style/Widget.CardContent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/author"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_marginTop="16dp"
+                                android:id="@+id/avatar_author"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:gravity="center"
+                                app:imageUrl="@{viewModel.previewCoverSource}"/>
+
+                            <TextView
+                                android:layout_marginTop="30dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewModel.displayName}"
+                                android:textSize="24sp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/card_margin">
+
+                        <LinearLayout
+                            style="@style/Widget.CardContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:layout_width="match_parent"

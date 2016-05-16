@@ -36,7 +36,7 @@ public class BookDetailViewModel implements ViewModel {
     public ObservableField<String> description;
     public ObservableField<String> extract;
     public ObservableField<String> displayName;
-    public ObservableField<String> imageUrl;
+    public ObservableField<String> previewCoverSource;
 
     private Context context;
     private Subscription subscription;
@@ -50,6 +50,8 @@ public class BookDetailViewModel implements ViewModel {
     }
 
 
+
+
     public BookDetailViewModel(Context context, int idWork) {
         this.context = context;
         this.idWork = idWork;
@@ -60,7 +62,7 @@ public class BookDetailViewModel implements ViewModel {
         text = new ObservableField<String>();
         description = new ObservableField<String>();
         extract = new ObservableField<String>();
-        imageUrl = new ObservableField<String>();
+        previewCoverSource = new ObservableField<String>();
         displayName = new ObservableField<String>();
 
 
@@ -74,18 +76,27 @@ public class BookDetailViewModel implements ViewModel {
     }
 
     @BindingAdapter({"bind:imageUri"})
-    public static void loadImage(ImageView view, String imageUri) {
+    public static void loadImageLocal(ImageView view, String imageUri) {
         Glide.with(view.getContext())
                 .load(R.drawable.placeholder2)
                 .fitCenter()
                 .into(view);
+
     }
 
     @BindingAdapter({"bind:imageUrl"})
-    public static void loadImageRemote(ImageView view, String imageUrl) {
+    public static void loadImage(ImageView view, String imageUrl) {
+        if (imageUrl!=null)
         Picasso.with(view.getContext())
                 .load(imageUrl)
+                .placeholder(R.drawable.user_placeholder)
                 .into(view);
+        else{
+            Glide.with(view.getContext())
+                    .load(R.drawable.user_placeholder)
+                    .fitCenter()
+                    .into(view);
+        }
     }
 
     private void loadDetailOfWork() {
@@ -118,7 +129,7 @@ public class BookDetailViewModel implements ViewModel {
                         text.set(work.text);
                         description.set(work.description);
 
-                        imageUrl.set(workInfo.authors.get(0).getPreviewPicureSource());
+                        previewCoverSource.set(workInfo.authors.get(0).getPreviewPicureSource());
                         displayName.set(work.authors.get(0).displayName);
 
 
