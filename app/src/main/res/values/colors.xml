@@ -16,4 +16,6 @@
     <color name="input_register">#888888</color>
     <color name="input_register_bg">#3b4148</color>
     <color name="input_register_hint">#5e6266</color>
+
+    <color name="window_background">#FFF5F5F5</color>
 </resources>

@@ -76,8 +76,9 @@
 
         <variable
             name="viewModel"
-            type="com.bsuir.kloop1996.bookva.viewmodel.AuthorizationViewModel" />
+            type="com.bsuir.kloop1996.bookva.viewmodel.RegisterViewModel" />
     </data>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -85,8 +86,12 @@
         android:background="@color/bg_login"
         android:gravity="center"
         android:padding="10dp">
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
         <LinearLayout
+            android:id="@+id/layout_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -107,7 +112,7 @@
                 android:textColor="@color/input_login"
                 android:textColorHint="@color/input_login_hint"
                 android:text="@{viewModel.loginField}"
-                app:addTextChangedListener="@{viewModel.loginEditTextWatcher}"/>
+                app:addTextChangedListener="@{viewModel.emailEditTextWatcher}"/>
 
             <EditText
                 android:id="@+id/loginEdit"
@@ -150,7 +155,7 @@
                 android:background="@color/btn_login_bg"
                 android:text="@string/btn_register"
                 android:textColor="@color/btn_login"
-                android:onClick="@{viewModel.onClickLogin}"/>
+                android:onClick="@{viewModel.onClickRegister}"/>
 
             <!-- Link to Login Screen -->
 
@@ -166,6 +171,18 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progress_auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_register"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:visibility="@{viewModel.progressVisibility}"/>
+
+    </RelativeLayout>
     </LinearLayout>
+
+
 
 </layout>

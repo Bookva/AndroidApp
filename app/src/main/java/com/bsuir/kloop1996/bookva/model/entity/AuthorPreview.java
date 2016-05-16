@@ -15,4 +15,8 @@ public class AuthorPreview {
         this.pictureSource=pictureSource;
         this.previewPicureSource=previewPicureSource;
     }
+
+
+    public String getDisplayName(){return displayName;}
+    public String getPreviewPicureSource(){return previewPicureSource;}
 }

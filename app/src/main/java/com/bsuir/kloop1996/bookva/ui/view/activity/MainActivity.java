@@ -13,7 +13,9 @@ import android.view.View;
 import com.bsuir.kloop1996.bookva.R;
 import com.bsuir.kloop1996.bookva.BookvaAplication;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.AuthorizationFragment;
+import com.bsuir.kloop1996.bookva.ui.view.fragment.RegisterFragment;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.WorkFragment;
+import com.bsuir.kloop1996.bookva.viewmodel.RegisterViewModel;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.feed).withIcon(R.drawable.ic_book_open_page_variant).withTag("feed"),
-                        new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization")
+                        new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization"),
+                        new PrimaryDrawerItem().withName(R.string.btn_register).withIcon(R.drawable.ic_account).withTag("register")
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -95,7 +98,32 @@ public class MainActivity extends AppCompatActivity {
         if (subscription != null) subscription.unsubscribe();
     }
 
-    private void changeFragment(String tag){
+
+    public void callbackRegisterUser(){
+        FragmentTransaction tx;
+        Fragment fragment;
+
+
+        WorkFragment workFragment = (WorkFragment) getFragmentManager().findFragmentByTag(WORK_LIST_FRAGMENT);
+
+        if (workFragment != null && workFragment.isVisible()) {
+            return;
+        }
+
+
+        tx = getFragmentManager()
+                .beginTransaction();
+
+        fragment = new  WorkFragment();
+
+        tx.replace(R.id.container_layout, fragment, WORK_LIST_FRAGMENT);
+        tx.addToBackStack(null);
+
+        tx.commit();
+
+    }
+
+    public void changeFragment(String tag){
         FragmentTransaction tx;
         Fragment fragment;
 
@@ -144,10 +172,29 @@ public class MainActivity extends AppCompatActivity {
                 loadDrawer();
 
                 break;
+            case "register":
+                RegisterFragment registerFragment = (RegisterFragment) getFragmentManager().findFragmentByTag("register");
+
+                if (registerFragment != null && registerFragment.isVisible()) {
+                    break;
+                }
+
+
+                tx = getFragmentManager()
+                        .beginTransaction();
+
+                fragment = new  RegisterFragment();
+
+                tx.replace(R.id.container_layout, fragment, "register");
+                tx.addToBackStack(null);
+
+                tx.commit();
+
+                break;
         }
     }
 
-    public void loadDrawer(){
+    private void loadDrawer(){
         BookvaAplication bookvaAplication = BookvaAplication.get(this);
         drawer.removeAllItems();
 
@@ -160,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
         }else{
             drawer.addItems(
                     new PrimaryDrawerItem().withName(R.string.feed).withIcon(R.drawable.ic_book_open_page_variant).withTag("feed"),
-                    new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization")
+                    new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization"),
+                    new PrimaryDrawerItem().withName(R.string.btn_register).withIcon(R.drawable.ic_account).withTag("register")
             );
         }
     }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bsuir.kloop1996.bookva.R;
-import com.bsuir.kloop1996.bookva.WorkAdapter;
+import com.bsuir.kloop1996.bookva.ui.WorkAdapter;
 import com.bsuir.kloop1996.bookva.databinding.WorkFragmentBinding;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
 import com.bsuir.kloop1996.bookva.viewmodel.WorkListViewModel;

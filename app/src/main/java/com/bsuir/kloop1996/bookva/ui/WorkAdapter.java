@@ -1,13 +1,17 @@
 package com.bsuir.kloop1996.bookva.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bsuir.kloop1996.bookva.R;
 import com.bsuir.kloop1996.bookva.databinding.ItemWorkBinding;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
+import com.bsuir.kloop1996.bookva.ui.view.activity.BookDetailActivity;
 import com.bsuir.kloop1996.bookva.viewmodel.ItemWorkViewModel;
 
 import java.util.Collections;
@@ -37,6 +41,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
     @Override
     public void onBindViewHolder(WorkViewHolder holder, int position) {
         holder.bindRepository(works.get(position));
+
+
     }
 
     @Override

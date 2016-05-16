@@ -9,25 +9,28 @@ import android.view.ViewGroup;
 
 import com.bsuir.kloop1996.bookva.R;
 import com.bsuir.kloop1996.bookva.databinding.AuthorizationFragmentBinding;
+import com.bsuir.kloop1996.bookva.databinding.RegisterFragmentBinding;
 import com.bsuir.kloop1996.bookva.viewmodel.AuthorizationViewModel;
+import com.bsuir.kloop1996.bookva.viewmodel.RegisterViewModel;
 
 /**
- * Created by kloop1996 on 12.05.2016.
+ * Created by kloop1996 on 16.05.2016.
  */
-public class AuthorizationFragment extends Fragment {
-    private AuthorizationViewModel authorizationViewModel;
-    AuthorizationFragmentBinding authorizationFragmentBinding;
+public class RegisterFragment extends Fragment {
+    private RegisterViewModel registerViewModel;
+    private RegisterFragmentBinding registerFragmentBinding;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        authorizationFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.authorization_fragment,container,false);
-        authorizationViewModel = new AuthorizationViewModel(getActivity());
-        authorizationFragmentBinding.setViewModel(authorizationViewModel);
+        registerFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.register_fragment,container,false);
+        registerViewModel = new RegisterViewModel(getActivity());
+        registerFragmentBinding.setViewModel(registerViewModel);
 
-        return authorizationFragmentBinding.getRoot();
+        return registerFragmentBinding.getRoot();
     }
 
 }

@@ -5,6 +5,7 @@ import com.bsuir.kloop1996.bookva.model.entity.Author;
 import com.bsuir.kloop1996.bookva.model.entity.Genre;
 import com.bsuir.kloop1996.bookva.model.entity.Profile;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
+import com.bsuir.kloop1996.bookva.model.entity.WorkInfo;
 
 import java.util.List;
 
@@ -37,6 +38,12 @@ public interface BookvaService {
     })
     @GET("/api/authors/{id}")
     public rx.Observable<Author> getAuthor(@Path("id") int id);
+
+    @Headers({
+            "Content-type : application/json"
+    })
+    @GET("/api/works/{id}")
+    public rx.Observable<WorkInfo> getWorkInfo(@Path("id") int id);
 
 
     @Headers({
