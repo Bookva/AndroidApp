@@ -129,8 +129,8 @@ public class BookDetailViewModel implements ViewModel {
                         text.set(work.text);
                         description.set(work.description);
 
-                        previewCoverSource.set(workInfo.authors.get(0).getPreviewPicureSource());
-                        displayName.set(work.authors.get(0).displayName);
+                        previewCoverSource.set(workInfo.authors.get(0).getPreviewPictureSource());
+                        displayName.set(work.authors.get(0).getDisplayName());
 
 
                         Toast.makeText(bookvaAplication, "Load", Toast.LENGTH_LONG).show();
