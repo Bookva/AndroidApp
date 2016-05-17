@@ -125,12 +125,12 @@ public class BookDetailViewModel implements ViewModel {
                     @Override
                     public void onNext(WorkInfo work) {
                         workInfo = work;
-                        extract.set(work.extract);
-                        text.set(work.text);
-                        description.set(work.description);
+                        extract.set(work.getExtract());
+                        text.set(work.getText());
+                        description.set(work.getDescription());
 
-                        previewCoverSource.set(workInfo.authors.get(0).getPreviewPictureSource());
-                        displayName.set(work.authors.get(0).getDisplayName());
+                        previewCoverSource.set(workInfo.getAuthors().get(0).getPreviewPictureSource());
+                        displayName.set(work.getAuthors().get(0).getDisplayName());
 
 
                         Toast.makeText(bookvaAplication, "Load", Toast.LENGTH_LONG).show();

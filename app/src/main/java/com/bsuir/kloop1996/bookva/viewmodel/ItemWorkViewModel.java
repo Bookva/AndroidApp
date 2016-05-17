@@ -27,23 +27,23 @@ public class ItemWorkViewModel extends BaseObservable implements ViewModel {
     }
 
     public String getTitle() {
-        return work.title;
+        return work.getTitle();
     }
 
     public String getDescription() {
-        return work.description;
+        return work.getDescription();
     }
 
     public String getRaiting() {
-        return String.valueOf(work.averageRating) + "\n Рейтинг";
+        return String.valueOf(work.getAverageRating()) + "\n Рейтинг";
     }
 
     public String getReviewsCount() {
-        return String.valueOf(work.reviewsCount) + "\n Отзыва";
+        return String.valueOf(work.getReviewsCount()) + "\n Отзыва";
     }
 
     public String getPreviewCoverSource() {
-        return work.previewCoverSource;
+        return work.getPreviewCoverSource();
     }
 
     public void setWork(Work work) {
@@ -73,8 +73,8 @@ public class ItemWorkViewModel extends BaseObservable implements ViewModel {
     public void onClick(View v) {
         Context context = v.getContext();
         Intent intent = new Intent(context, BookDetailActivity.class);
-        intent.putExtra(BookDetailActivity.EXTRA_ID_WORK, work.id);
-        intent.putExtra(BookDetailActivity.EXTRA_TITLE, work.title);
+        intent.putExtra(BookDetailActivity.EXTRA_ID_WORK, work.getId());
+        intent.putExtra(BookDetailActivity.EXTRA_TITLE, work.getTitle());
 
         context.startActivity(intent);
     }
