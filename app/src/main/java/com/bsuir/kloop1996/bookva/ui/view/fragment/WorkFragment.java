@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bsuir.kloop1996.bookva.R;
-import com.bsuir.kloop1996.bookva.ui.WorkAdapter;
+import com.bsuir.kloop1996.bookva.ui.view.adapter.WorkAdapter;
 import com.bsuir.kloop1996.bookva.databinding.WorkFragmentBinding;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
 import com.bsuir.kloop1996.bookva.viewmodel.WorkListViewModel;
@@ -45,7 +45,7 @@ public class WorkFragment extends Fragment implements WorkListViewModel.DataList
     }
 
     @Override
-    public void onRepositoriesChanged(List<Work> works) {
+    public void onWorksChanged(List<Work> works) {
         WorkAdapter adapter =
                 (WorkAdapter) workFragmentBinding.workRecyclerView.getAdapter();
         adapter.setWorks(works);

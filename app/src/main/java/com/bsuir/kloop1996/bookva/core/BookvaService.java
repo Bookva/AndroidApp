@@ -2,6 +2,7 @@ package com.bsuir.kloop1996.bookva.core;
 
 import com.bsuir.kloop1996.bookva.model.entity.AccessToken;
 import com.bsuir.kloop1996.bookva.model.entity.Author;
+import com.bsuir.kloop1996.bookva.model.entity.AuthorPreview;
 import com.bsuir.kloop1996.bookva.model.entity.Genre;
 import com.bsuir.kloop1996.bookva.model.entity.Profile;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
@@ -32,6 +33,12 @@ public interface BookvaService {
     })
     @GET("/api/authors")
     public rx.Observable<List<Author>> getAuthors();
+
+    @Headers({
+            "Content-type : application/json"
+    })
+    @GET("/api/authors")
+    public rx.Observable<List<AuthorPreview>> getAuthorsPreviews();
 
     @Headers({
             "Content-type : application/json"

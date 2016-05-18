@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.bsuir.kloop1996.bookva.R;
 import com.bsuir.kloop1996.bookva.BookvaAplication;
+import com.bsuir.kloop1996.bookva.ui.view.fragment.AuthorPreviewFragment;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.AuthorizationFragment;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.RegisterFragment;
 import com.bsuir.kloop1996.bookva.ui.view.fragment.WorkFragment;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.feed).withIcon(R.drawable.ic_book_open_page_variant).withTag("feed"),
+                        new PrimaryDrawerItem().withName(R.string.authors).withIcon(R.drawable.ic_account).withTag("authors"),
                         new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization"),
                         new PrimaryDrawerItem().withName(R.string.btn_register).withIcon(R.drawable.ic_account).withTag("register")
                 )
@@ -191,6 +193,25 @@ public class MainActivity extends AppCompatActivity {
                 tx.commit();
 
                 break;
+            case "authors":
+                AuthorPreviewFragment AuthorPreviewFragment = (AuthorPreviewFragment) getFragmentManager().findFragmentByTag("AuthorPreview");
+
+                if (AuthorPreviewFragment != null && AuthorPreviewFragment.isVisible()) {
+                    break;
+                }
+
+
+                tx = getFragmentManager()
+                        .beginTransaction();
+
+                fragment = new  AuthorPreviewFragment();
+
+                tx.replace(R.id.container_layout, fragment, "authors");
+                tx.addToBackStack(null);
+
+                tx.commit();
+
+                break;
         }
     }
 
@@ -201,12 +222,14 @@ public class MainActivity extends AppCompatActivity {
         if (bookvaAplication.getToken()!=null){
             drawer.addItems(
                     new PrimaryDrawerItem().withName(R.string.feed).withIcon(R.drawable.ic_book_open_page_variant).withTag("feed"),
+                    new PrimaryDrawerItem().withName(R.string.authors).withIcon(R.drawable.ic_account).withTag("authors"),
                     new SectionDrawerItem().withName(R.string.account),
                     new SecondaryDrawerItem().withName(R.string.logout).withIcon(R.drawable.ic_logout_variant).withTag("logout")
             );
         }else{
             drawer.addItems(
                     new PrimaryDrawerItem().withName(R.string.feed).withIcon(R.drawable.ic_book_open_page_variant).withTag("feed"),
+                    new PrimaryDrawerItem().withName(R.string.authors).withIcon(R.drawable.ic_account).withTag("authors"),
                     new PrimaryDrawerItem().withName(R.string.login).withIcon(R.drawable.ic_account).withTag("authorization"),
                     new PrimaryDrawerItem().withName(R.string.btn_register).withIcon(R.drawable.ic_account).withTag("register")
             );

@@ -1,13 +1,18 @@
 package com.bsuir.kloop1996.bookva.viewmodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableInt;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bsuir.kloop1996.bookva.BookvaAplication;
 import com.bsuir.kloop1996.bookva.core.BookvaService;
+import com.bsuir.kloop1996.bookva.model.entity.AuthorPreview;
 import com.bsuir.kloop1996.bookva.model.entity.Work;
+import com.bsuir.kloop1996.bookva.model.entity.WorkInfo;
+import com.bsuir.kloop1996.bookva.ui.view.activity.BookDetailActivity;
 
 import java.util.List;
 
@@ -16,41 +21,57 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by kloop1996 on 12.05.2016.
+ * Created by kloop1996 on 18.05.2016.
  */
-public class WorkListViewModel {
+public class AuthorPreviewViewModel implements ViewModel {
+    public ObservableInt progressVisibility;
+    public ObservableInt recyclerViewVisibility;
 
 
     private Context context;
-    private DataListener dataListener;
     private Subscription subscription;
-    private List<Work> works;
+    private DataListener dataListener;
+    private List<AuthorPreview> authorPreviews;
 
-    public ObservableInt recyclerViewVisibility;
-    public ObservableInt progressVisibility;
 
-    public WorkListViewModel(Context context, DataListener dataListener) {
-        this.context=context;
-        this.dataListener=dataListener;
-        recyclerViewVisibility = new ObservableInt(View.INVISIBLE);
-        progressVisibility = new ObservableInt(View.VISIBLE);
-        loadListWork();
+    public AuthorPreviewViewModel(Context context, DataListener dataListener){
+        this.context= context;
+        this.dataListener = dataListener;
+
+        progressVisibility = new ObservableInt();
+        recyclerViewVisibility = new ObservableInt();
+
+        recyclerViewVisibility.set(View.INVISIBLE);
+        progressVisibility.set(View.VISIBLE);
+
+        loadAuthorPreviews();
     }
 
-    private void loadListWork() {
+    @Override
+    public void destroy() {
+        context = null;
+        subscription = null;
+    }
+
+    public interface DataListener {
+        void onAuthorPreviewsChanged(List<AuthorPreview> authorPreviews);
+    }
+
+    private void loadAuthorPreviews(){
         final BookvaAplication bookvaAplication = BookvaAplication.get(context);
         BookvaService bookvaService = bookvaAplication.getBookvaService();
 
         if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
 
-        subscription = bookvaService.getAllWorks()
+        subscription = bookvaService.getAuthorsPreviews()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(bookvaAplication.defaultSubscribeScheduler())
-                .subscribe(new Subscriber<List<Work>>() {
+                .subscribe(new Subscriber<List<AuthorPreview>>() {
                     @Override
                     public void onCompleted() {
                         if (dataListener!=null)
-                            dataListener.onWorksChanged(works);
+                            dataListener.onAuthorPreviewsChanged(authorPreviews);
+
                         recyclerViewVisibility.set(View.VISIBLE);
                         progressVisibility.set(View.INVISIBLE);
                     }
@@ -62,15 +83,15 @@ public class WorkListViewModel {
                     }
 
                     @Override
-                    public void onNext(List<Work> works) {
-                        WorkListViewModel.this.works = works;
+                    public void onNext(List<AuthorPreview> authorPreviews) {
+
+                        AuthorPreviewViewModel.this.authorPreviews = authorPreviews;
                         Toast.makeText(bookvaAplication, "Load", Toast.LENGTH_LONG).show();
 
                     }
                 });
     }
 
-    public interface DataListener {
-        void onWorksChanged(List<Work> work);
-    }
+
+
 }

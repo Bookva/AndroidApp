@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_centerInParent="true">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bsuir.kloop1996.bookva.viewmodel.AuthorPreviewViewModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progress_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:visibility="@{viewModel.progressVisibility}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/authors_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/vertical_margin_half"
+            android:paddingTop="@dimen/vertical_margin_half"
+            android:scrollbars="vertical"
+            app:visibility="@{viewModel.recyclerViewVisibility}"
+            tools:listitem="@layout/item_author_preview"
+            />
+    </RelativeLayout>
+
+</layout>
